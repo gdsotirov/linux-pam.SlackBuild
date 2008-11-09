@@ -1,0 +1,13 @@
+linux-pam: Linux-PAM (Pluggable Authentication Modules for Linux)
+linux-pam:
+linux-pam: Linux-PAM is a library that enables the local system administrator
+linux-pam: to choose how individual applications authenticate users.
+linux-pam: The purpose of the Linux-PAM project is to liberate the development
+linux-pam: of privilege granting software from the development of secure and
+linux-pam: appropriate authentication schemes.  This is accomplished by
+linux-pam: providing a documented library of functions that an application
+linux-pam: may use for all forms of user authentication management.  This
+linux-pam: library dynamically loads locally configured authentication
+linux-pam: modules that actually perform the authentication tasks. 
+linux-pam:
+linux-pam: Packaged by Georgi D. Sotirov <gdsotirov@dir.bg>
