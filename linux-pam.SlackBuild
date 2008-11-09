@@ -1,0 +1,90 @@
+#!/bin/sh
+#
+# Slackware build script for Linux-PAM
+# Written by Georgi D. Sotirov <gdsotirov@dir.bg>
+# Visit SlackPack at http://sotirov-bg.net/slackpack/
+#
+
+. /etc/slack-package.conf
+
+NAME=Linux-PAM
+PNAME=`echo $NAME | tr "[:upper:]" "[:lower:]"`
+VERSION=1.0.2
+BUILD=1
+ARCH=${ARCH:-i486}
+
+CWD=${CWD:-`pwd`}
+TMP=${TMP:-/tmp}
+
+if [ ! -e $TMP ]; then
+  mkdir -p $TMP # location to build the source
+fi
+
+SRC=$TMP/$NAME-$VERSION
+if [ -e $SRC -a -d $SRC ]; then
+  echo "Source directory '$SRC' already exists! Plaese, move it or remove it."
+  exit 1
+fi
+
+PKG=$TMP/package-$PNAME
+if [ -e $PKG -a -d $PKG ]; then
+  echo "Package creation directory '$PKG' already exists! Please, move it or remove it."
+  exit 2
+fi
+mkdir -p $PKG
+
+# Extract the sources
+cd $TMP
+tar -jxvf $CWD/$NAME-$VERSION.tar.bz2 || exit 3
+cd $SRC
+fix_source
+
+
+CFLAGS=$SLKCFLAGS \
+CXXFLAGS=$SLKCFLAGS \
+./configure --build=$ARCH-slackware-linux \
+            --host=$ARCH-slackware-linux \
+            --prefix=/usr \
+            --sysconfdir=/etc \
+            --mandir=/usr/man \
+            --enable-shared=yes \
+            --enable-static=no
+
+make -j4 || exit 1
+make DESTDIR=$PKG install || exit 2
+
+# Install configuration file for vmware-authd
+install -m 755 -d $PKG/etc/pam.d
+install -m 644 $CWD/vmware-authd.slack $PKG/etc/pam.d/vmware-authd.slack
+
+bin_perms $PKG
+sbin_perms $PKG
+( cd $PKG; strip_bin; strip_lib )
+( cd $SRC; create_docs $PKG $PNAME-$VERSION )
+gzip_man $PKG
+
+# Copy service info
+install -m 755 -d $PKG/install
+install -m 644 $CWD/slack-desc     $PKG/install/slack-desc
+install -m 644 $CWD/slack-required $PKG/install/slack-required
+
+SBDIR=$PKG/usr/src/slackbuilds/$PNAME-$VERSION
+install -m 755 -d $SBDIR
+install -m 644 $CWD/slack-desc         $SBDIR/slack-desc
+install -m 644 $CWD/slack-required     $SBDIR/slack-required
+install -m 644 $CWD/vmware-authd.slack $SBDIR/vmware-authd.slack
+install -m 644 $CWD/$PNAME.SlackBuild   $SBDIR/$PNAME.SlackBuild
+
+PKGNAME=$PNAME-$VERSION-$ARCH-$BUILD$MYIN
+cd $PKG
+makepkg -l y -c n $PKG_DIR/$PKGNAME.tgz
+cd $PKG_DIR
+md5sum $PKGNAME.tgz > $PKGNAME.tgz.md5
+cp $CWD/slack-desc $PKGNAME.txt
+
+# Clean up (optionally)
+if [ "$1" = "--cleanup" ]; then
+  rm -rf $SRC
+  rm -rf $PKG
+fi
+
