@@ -9,7 +9,7 @@
 
 NAME=Linux-PAM
 PNAME=`echo $NAME | tr "[:upper:]" "[:lower:]"`
-VERSION=1.0.2
+VERSION=1.0.4
 BUILD=1
 ARCH=${ARCH:-i486}
 
@@ -48,10 +48,10 @@ CXXFLAGS=$SLKCFLAGS \
             --sysconfdir=/etc \
             --mandir=/usr/man \
             --enable-shared=yes \
-            --enable-static=no
+            --enable-static=no || exit 1
 
-make -j4 || exit 1
-make DESTDIR=$PKG install || exit 2
+make -j4 || exit 2
+make DESTDIR=$PKG install || exit 3
 
 # Install configuration file for vmware-authd
 install -m 755 -d $PKG/etc/pam.d
