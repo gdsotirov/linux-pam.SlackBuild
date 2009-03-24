@@ -1,5 +1,5 @@
-coreutils >= 6.9
-sendmail >= 8.14.2
+coreutils >= 6.12
+sendmail >= 8.14.3
 db44 >= 4.4.20
 glibc-solibs >= 2.7
 xauth >= 1.0.3
