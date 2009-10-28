@@ -5,11 +5,11 @@
 # Visit SlackPack at http://sotirov-bg.net/slackpack/
 #
 
-. /etc/slack-package.conf
+. ../slack-package.conf
 
 NAME=Linux-PAM
 PNAME=`echo $NAME | tr "[:upper:]" "[:lower:]"`
-VERSION=1.0.4
+VERSION=1.1.0
 BUILD=1
 ARCH=${ARCH:-i486}
 
@@ -61,6 +61,7 @@ bin_perms $PKG
 sbin_perms $PKG
 ( cd $PKG; strip_bin; strip_lib )
 ( cd $SRC; create_docs $PKG $PNAME-$VERSION )
+( cd $PKG/usr/doc/$PNAME-$VERSION; rm -rf doc )
 gzip_man $PKG
 
 # Copy service info
@@ -77,9 +78,9 @@ install -m 644 $CWD/$PNAME.SlackBuild   $SBDIR/$PNAME.SlackBuild
 
 PKGNAME=$PNAME-$VERSION-$ARCH-$BUILD$MYIN
 cd $PKG
-makepkg -l y -c n $PKG_DIR/$PKGNAME.tgz
+makepkg -l y -c n $PKG_DIR/$PKGNAME.txz
 cd $PKG_DIR
-md5sum $PKGNAME.tgz > $PKGNAME.tgz.md5
+md5sum $PKGNAME.txz > $PKGNAME.txz.md5
 cp $CWD/slack-desc $PKGNAME.txt
 
 # Clean up (optionally)
