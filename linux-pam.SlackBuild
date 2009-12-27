@@ -9,7 +9,7 @@
 
 NAME=Linux-PAM
 PNAME=`echo $NAME | tr "[:upper:]" "[:lower:]"`
-VERSION=1.1.0
+VERSION=1.1.1
 BUILD=1
 ARCH=${ARCH:-i486}
 
