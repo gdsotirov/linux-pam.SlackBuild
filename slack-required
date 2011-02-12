@@ -1,5 +1,7 @@
-coreutils >= 7.4
-sendmail >= 8.14.3
+coreutils >= 8.5
 db44 >= 4.4.20
-glibc-solibs >= 2.9
-xauth >= 1.0.3
+glibc-solibs >= 2.11.1
+jdk >= 6u20 | jre >= 6u20 | module-init-tools >= 3.11.1
+scripts >= 1.0.1
+sendmail >= 8.14.4
+xauth >= 1.0.4
