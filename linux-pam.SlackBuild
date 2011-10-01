@@ -19,7 +19,7 @@
 #
 # Visit SlackPack at http://sotirov-bg.net/slackpack/
 #
-# $Id: linux-pam.SlackBuild,v 1.5 2011/02/12 15:09:13 gsotirov Exp $
+# $Id: linux-pam.SlackBuild,v 1.6 2011/10/01 21:35:41 gsotirov Exp $
 #
 
 . ../slack-package.conf
@@ -52,7 +52,7 @@ mkdir -p $PKG
 
 # Extract the sources
 cd $TMP
-tar -jxvf $CWD/$NAME-$VERSION.tar.bz2 || exit 3
+tar -xvf $CWD/$NAME-$VERSION.tar.?z* || exit 3
 cd $SRC
 fix_source
 
@@ -63,6 +63,7 @@ CXXFLAGS=$SLKCFLAGS \
             --host=$ARCH-slackware-linux \
             --prefix=/usr \
             --sysconfdir=/etc \
+            --libdir=/usr/lib${LIBDIRSUFFIX} \
             --mandir=/usr/man \
             --enable-shared=yes \
             --enable-static=no || exit 1
