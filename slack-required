@@ -1,4 +1,5 @@
-coreutils >= 8.19
-db44 >= 4.4.20
-glibc-solibs >= 2.15
-xauth >= 1.0.7
+coreutils >= 8.25
+db48 >= 4.8.30
+glibc-solibs >= 2.23
+libtirpc >= 1.0.1
+xauth >= 1.0.9
