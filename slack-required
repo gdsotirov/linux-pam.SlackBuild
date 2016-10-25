@@ -1,4 +1,4 @@
-coreutils >= 8.19
-db44 >= 4.4.20
-glibc-solibs >= 2.15
-xauth >= 1.0.7
+coreutils >= 8.21 | freeipmi >= 1.4.11 | jdk >= 6u25 | sendmail >= 8.14.7
+db48 >= 4.8.30
+glibc-solibs >= 2.17
+xauth >= 1.0.8
