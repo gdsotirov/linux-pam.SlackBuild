@@ -1,4 +1,4 @@
-coreutils >= 8.25
+coreutils >= 8.25 | freeipmi >= 1.5.4 | sendmail >= 8.15.2
 db48 >= 4.8.30
 glibc-solibs >= 2.23
 libtirpc >= 1.0.1
