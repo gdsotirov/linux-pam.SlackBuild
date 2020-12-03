@@ -10,4 +10,4 @@ linux-pam: may use for all forms of user authentication management.  This
 linux-pam: library dynamically loads locally configured authentication
 linux-pam: modules that actually perform the authentication tasks. 
 linux-pam:
-linux-pam: Packaged by Georgi D. Sotirov <gdsotirov@dir.bg>
+linux-pam: Packaged by Georgi D. Sotirov <gdsotirov@gmail.com>
